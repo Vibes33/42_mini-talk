@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   client.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rydelepi <rydelepi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/16 16:07:11 by rydelepi          #+#    #+#             */
+/*   Updated: 2025/11/16 16:07:11 by rydelepi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 #include <signal.h>
 #include <stdlib.h>
 #include <string.h>
-#include "42_Libft/libft.h"
-#include "42_printf/libftprintf.h"
+#include "Libft/libft.h"
+#include "Printf/libftprintf.h"
 
 static int	g_received = 0;
 
@@ -60,14 +72,11 @@ int	main(int argc, char **argv)
 	while (argv[2][i])
 	{
 		byte = (unsigned char)argv[2][i];
-		// Send current byte to server
 		send_byte(server_pid, byte);
-		// Move to next byte
 		i++;
 	}
 	send_byte(server_pid, '\0');
 	usleep(1000);
-	usleep(500);
         if (g_received)
             ft_printf("Message received by server!\n");
 	return (0);

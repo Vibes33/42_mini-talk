@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   server.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rydelepi <rydelepi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/16 16:07:19 by rydelepi          #+#    #+#             */
+/*   Updated: 2025/11/16 16:07:19 by rydelepi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 #include <signal.h>
 #include <stdlib.h>
 #include <string.h>
-#include "42_Libft/libft.h"
-#include "42_printf/libftprintf.h"
+#include "Libft/libft.h"
+#include "Printf/libftprintf.h"
 
 static int	g_char = 0;
 static int	g_bit_count = 0;

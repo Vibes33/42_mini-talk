@@ -11,8 +11,8 @@ OBJ_SERVER = $(SRC_SERVER:.c=.o)
 OBJ_CLIENT = $(SRC_CLIENT:.c=.o)
 
 # Libft and Printf
-LIBFT_DIR = 42_Libft
-PRINTF_DIR = 42_printf
+LIBFT_DIR = Libft
+PRINTF_DIR = Printf
 LIBFT = $(LIBFT_DIR)/libft.a
 LIBPRINTF = $(PRINTF_DIR)/libftprintf.a
 
