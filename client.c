@@ -17,12 +17,11 @@
 #include "Libft/libft.h"
 #include "Printf/libftprintf.h"
 
-static int	g_received = 0;
 
 
 void	handle_sigusr1(int sig)
 {
-	g_received = 1;
+    ft_printf("Message received by server!\n");
 	(void)sig;
 }
 
@@ -76,7 +75,5 @@ int	main(int argc, char **argv)
 		i++;
 	}
 	send_byte(server_pid, '\0');
-        if (g_received)
-            ft_printf("Message received by server!\n");
 	return (0);
 }

@@ -38,7 +38,6 @@ void	handle_sigusr1(int sig, siginfo_t *info, void *context)
 	{
 		if (g_state.g_char == 0)
 		{
-			write(1, "\n", 1);
 			if (g_state.g_client_pid > 0)
 				kill(g_state.g_client_pid, SIGUSR1);
 			g_state.g_client_pid = 0;
@@ -66,7 +65,6 @@ void	handle_sigusr2(int sig, siginfo_t *info, void *context)
 	{
 		if (g_state.g_char == 0)
 		{
-			write(1, "\n", 1);
 			if (g_state.g_client_pid > 0)
 				kill(g_state.g_client_pid, SIGUSR1);
 			g_state.g_client_pid = 0;
