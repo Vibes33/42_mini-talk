@@ -1,0 +1,23 @@
+# Compiled binaries
+server
+client
+
+# Object files
+*.o
+*.a
+*.so
+
+# Dependencies
+*.d
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Temporary files
+*.tmp
+*.bak
