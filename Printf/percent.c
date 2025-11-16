@@ -32,9 +32,6 @@ int	ft_putstr(char *str)
 
 int	ft_put_hex(unsigned int n, char str)
 {
-	int	count;
-
-	count = 0;
 	if (n < 16)
 	{
 		if (str == 'x')

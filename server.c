@@ -17,33 +17,38 @@
 #include "Libft/libft.h"
 #include "Printf/libftprintf.h"
 
-static int	g_char = 0;
-static int	g_bit_count = 0;
-static int	g_client_pid = 0;
+typedef struct s_server_state
+{
+	int	g_char;
+	int	g_bit_count;
+	int	g_client_pid;
+}				t_server_state;
+
+static t_server_state	g_state = {0, 0, 0};
 
 void	handle_sigusr1(int sig, siginfo_t *info, void *context)
 {
-	if (g_bit_count == 0)
-		g_client_pid = info->si_pid;
+	if (g_state.g_bit_count == 0)
+		g_state.g_client_pid = info->si_pid;
 	
-	g_char = (g_char << 1) | 1;
-	g_bit_count++;
+	g_state.g_char = (g_state.g_char << 1) | 1;
+	g_state.g_bit_count++;
 	
-	if (g_bit_count == 8)
+	if (g_state.g_bit_count == 8)
 	{
-		if (g_char == 0)
+		if (g_state.g_char == 0)
 		{
 			write(1, "\n", 1);
-			if (g_client_pid > 0)
-				kill(g_client_pid, SIGUSR1);
-			g_client_pid = 0;
+			if (g_state.g_client_pid > 0)
+				kill(g_state.g_client_pid, SIGUSR1);
+			g_state.g_client_pid = 0;
 		}
 		else
 		{
-			write(1, (char *)&g_char, 1);
+			write(1, (char *)&g_state.g_char, 1);
 		}
-		g_char = 0;
-		g_bit_count = 0;
+		g_state.g_char = 0;
+		g_state.g_bit_count = 0;
 	}
 	(void)sig;
 	(void)context;
@@ -51,27 +56,27 @@ void	handle_sigusr1(int sig, siginfo_t *info, void *context)
 
 void	handle_sigusr2(int sig, siginfo_t *info, void *context)
 {
-	if (g_bit_count == 0)
-		g_client_pid = info->si_pid;
+	if (g_state.g_bit_count == 0)
+		g_state.g_client_pid = info->si_pid;
 	
-	g_char = (g_char << 1) | 0;
-	g_bit_count++;
+	g_state.g_char = (g_state.g_char << 1) | 0;
+	g_state.g_bit_count++;
 	
-	if (g_bit_count == 8)
+	if (g_state.g_bit_count == 8)
 	{
-		if (g_char == 0)
+		if (g_state.g_char == 0)
 		{
 			write(1, "\n", 1);
-			if (g_client_pid > 0)
-				kill(g_client_pid, SIGUSR1);
-			g_client_pid = 0;
+			if (g_state.g_client_pid > 0)
+				kill(g_state.g_client_pid, SIGUSR1);
+			g_state.g_client_pid = 0;
 		}
 		else
 		{
-			write(1, (char *)&g_char, 1);
+			write(1, (char *)&g_state.g_char, 1);
 		}
-		g_char = 0;
-		g_bit_count = 0;
+		g_state.g_char = 0;
+		g_state.g_bit_count = 0;
 	}
 	(void)sig;
 	(void)context;
