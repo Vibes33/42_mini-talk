@@ -76,7 +76,6 @@ int	main(int argc, char **argv)
 		i++;
 	}
 	send_byte(server_pid, '\0');
-	usleep(1000);
         if (g_received)
             ft_printf("Message received by server!\n");
 	return (0);
