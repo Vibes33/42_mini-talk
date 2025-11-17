@@ -14,34 +14,11 @@
 
 static t_server_state	g_state = {0, 0, 0};
 
-void	handle_sigusr1(int sig, siginfo_t *info, void *context)
+void	handle_sigusr(int sig, siginfo_t *info, void *context)
 {
 	if (g_state.g_bit_count == 0)
 		g_state.g_client_pid = info->si_pid;
-	g_state.g_char = (g_state.g_char << 1) | 1;
-	g_state.g_bit_count++;
-	if (g_state.g_bit_count == 8)
-	{
-		if (g_state.g_char == 0)
-		{
-			if (g_state.g_client_pid > 0)
-				kill(g_state.g_client_pid, SIGUSR1);
-			g_state.g_client_pid = 0;
-		}
-		else
-			write(1, (char *)&g_state.g_char, 1);
-		g_state.g_char = 0;
-		g_state.g_bit_count = 0;
-	}
-	(void)sig;
-	(void)context;
-}
-
-void	handle_sigusr2(int sig, siginfo_t *info, void *context)
-{
-	if (g_state.g_bit_count == 0)
-		g_state.g_client_pid = info->si_pid;
-	g_state.g_char = (g_state.g_char << 1) | 0;
+	g_state.g_char = (g_state.g_char << 1) | (sig == SIGUSR1);
 	g_state.g_bit_count++;
 	if (g_state.g_bit_count == 8)
 	{
@@ -68,11 +45,11 @@ int	main(void)
 
 	server_pid = getpid();
 	ft_bzero(&sa_usr1, sizeof(sa_usr1));
-	sa_usr1.sa_sigaction = handle_sigusr1;
+	sa_usr1.sa_sigaction = handle_sigusr;
 	sigemptyset(&sa_usr1.sa_mask);
 	sa_usr1.sa_flags = SA_SIGINFO;
 	ft_bzero(&sa_usr2, sizeof(sa_usr2));
-	sa_usr2.sa_sigaction = handle_sigusr2;
+	sa_usr2.sa_sigaction = handle_sigusr;
 	sigemptyset(&sa_usr2.sa_mask);
 	sa_usr2.sa_flags = SA_SIGINFO;
 	sigaction(SIGUSR1, &sa_usr1, NULL);
