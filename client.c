@@ -16,12 +16,11 @@
 #include <string.h>
 #include "Libft/libft.h"
 #include "Printf/libftprintf.h"
-
-
+#include "mini.h"
 
 void	handle_sigusr1(int sig)
 {
-    ft_printf("Message received by server!\n");
+	ft_printf("Message received by server!\n");
 	(void)sig;
 }
 
@@ -43,9 +42,9 @@ void	send_byte(int server_pid, unsigned char byte)
 
 int	main(int argc, char **argv)
 {
-	int				server_pid;
-	int				i;
-	unsigned char	byte;
+	int					server_pid;
+	int					i;
+	unsigned char		byte;
 	struct sigaction	sa;
 
 	if (argc != 3)
@@ -54,19 +53,16 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	server_pid = ft_atoi(argv[1]);
-	
 	if (server_pid <= 0)
 	{
 		ft_printf("Error: Invalid server PID\n");
 		return (1);
 	}
-
 	ft_bzero(&sa, sizeof(sa));
 	sa.sa_handler = handle_sigusr1;
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = 0;
 	sigaction(SIGUSR1, &sa, NULL);
-
 	i = 0;
 	while (argv[2][i])
 	{

@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
+/*   mini.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rydelepi <rydelepi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/14 09:49:40 by rydelepi          #+#    #+#             */
-/*   Updated: 2025/11/17 10:35:35 by rydelepi         ###   ########.fr       */
+/*   Created: 2025/11/17 10:32:03 by rydelepi          #+#    #+#             */
+/*   Updated: 2025/11/17 10:32:30 by rydelepi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef MINI_H
+# define MINI_H
 
-void	ft_putendl_fd(char *s, int fd)
+typedef struct s_server_state
 {
-	ft_putstr_fd(s, fd);
-	write(fd, "\n", 1);
-}
+	int	g_char;
+	int	g_bit_count;
+	int	g_client_pid;
+}				t_server_state;
 
-//int    main(int argc, char **argv)
-//{
-//	(void)argc;
-//    int    fd;
-//   fd = atoi(argv[2]);
-//   ft_putendl_fd(argv[1], fd);
-//  return (0);
-//}
+#endif
