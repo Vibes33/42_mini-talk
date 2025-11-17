@@ -6,11 +6,11 @@
 /*   By: rydelepi <rydelepi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 17:55:43 by rydelepi          #+#    #+#             */
-/*   Updated: 2025/11/17 18:01:23 by rydelepi         ###   ########.fr       */
+/*   Updated: 2025/11/17 18:10:08 by rydelepi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "mini.h"
+#include "mini.h"
 
 void	buffer_join(t_server_state *g_state)
 {
