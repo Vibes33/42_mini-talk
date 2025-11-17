@@ -10,12 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <signal.h>
-#include <stdlib.h>
-#include <string.h>
-#include "Libft/libft.h"
-#include "Printf/libftprintf.h"
 #include "mini.h"
 
 void	handle_sigusr1(int sig)
@@ -40,12 +34,35 @@ void	send_byte(int server_pid, unsigned char byte)
 	}
 }
 
+static void	init_signals(void)
+{
+	struct sigaction	sa;
+
+	ft_bzero(&sa, sizeof(sa));
+	sa.sa_handler = handle_sigusr1;
+	sigemptyset(&sa.sa_mask);
+	sa.sa_flags = 0;
+	sigaction(SIGUSR1, &sa, NULL);
+}
+
+static void	send_message(int server_pid, char *msg)
+{
+	int				i;
+	unsigned char	byte;
+
+	i = 0;
+	while (msg[i])
+	{
+		byte = (unsigned char)msg[i];
+		send_byte(server_pid, byte);
+		i++;
+	}
+	send_byte(server_pid, '\0');
+}
+
 int	main(int argc, char **argv)
 {
-	int					server_pid;
-	int					i;
-	unsigned char		byte;
-	struct sigaction	sa;
+	int	server_pid;
 
 	if (argc != 3)
 	{
@@ -58,18 +75,7 @@ int	main(int argc, char **argv)
 		ft_printf("Error: Invalid server PID\n");
 		return (1);
 	}
-	ft_bzero(&sa, sizeof(sa));
-	sa.sa_handler = handle_sigusr1;
-	sigemptyset(&sa.sa_mask);
-	sa.sa_flags = 0;
-	sigaction(SIGUSR1, &sa, NULL);
-	i = 0;
-	while (argv[2][i])
-	{
-		byte = (unsigned char)argv[2][i];
-		send_byte(server_pid, byte);
-		i++;
-	}
-	send_byte(server_pid, '\0');
+	init_signals();
+	send_message(server_pid, argv[2]);
 	return (0);
 }

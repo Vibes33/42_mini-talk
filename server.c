@@ -10,12 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <signal.h>
-#include <stdlib.h>
-#include <string.h>
-#include "Libft/libft.h"
-#include "Printf/libftprintf.h"
 #include "mini.h"
 
 static t_server_state	g_state = {0, 0, 0};
