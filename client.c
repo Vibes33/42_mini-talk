@@ -29,7 +29,7 @@ void	send_byte(int server_pid, unsigned char byte)
 			kill(server_pid, SIGUSR1);
 		else
 			kill(server_pid, SIGUSR2);
-		usleep(500);
+		usleep(200);
 		bit--;
 	}
 }

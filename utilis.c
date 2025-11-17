@@ -5,15 +5,21 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rydelepi <rydelepi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/29 09:53:05 by rydelepi          #+#    #+#             */
-/*   Updated: 2025/11/17 16:50:37 by rydelepi         ###   ########.fr       */
+/*   Created: 2025/11/17 17:55:43 by rydelepi          #+#    #+#             */
+/*   Updated: 2025/11/17 18:01:23 by rydelepi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+# include "mini.h"
 
-int	ft_putchar(char c)
+void	buffer_join(t_server_state *g_state)
 {
-	write(1, &c, 1);
-	return (1);
+	if (!g_state->buffer)
+		g_state->buffer = ft_strdup("");
+	g_state->new = ft_strjoin(g_state->buffer, &g_state->g_char);
+	if (g_state->buffer)
+		free(g_state->buffer);
+	if (!g_state->new)
+		return ;
+	g_state->buffer = g_state->new;
 }

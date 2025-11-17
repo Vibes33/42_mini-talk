@@ -6,7 +6,7 @@
 /*   By: rydelepi <rydelepi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/17 10:32:03 by rydelepi          #+#    #+#             */
-/*   Updated: 2025/11/17 11:07:03 by rydelepi         ###   ########.fr       */
+/*   Updated: 2025/11/17 17:59:37 by rydelepi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,14 @@
 
 typedef struct s_server_state
 {
-	int	g_char;
-	int	g_bit_count;
-	int	g_client_pid;
+
+	int		g_bit_count;
+	int		g_client_pid;
+	char	g_char;
+	char	*buffer;
+	char	*new;
 }				t_server_state;
+
+void	buffer_join(t_server_state *g_state);
 
 #endif

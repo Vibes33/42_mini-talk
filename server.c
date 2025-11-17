@@ -12,7 +12,7 @@
 
 #include "mini.h"
 
-static t_server_state	g_state = {0, 0, 0};
+t_server_state	g_state = {0, 0, 0, NULL, NULL};
 
 void	handle_sigusr(int sig, siginfo_t *info, void *context)
 {
@@ -27,9 +27,12 @@ void	handle_sigusr(int sig, siginfo_t *info, void *context)
 			if (g_state.g_client_pid > 0)
 				kill(g_state.g_client_pid, SIGUSR1);
 			g_state.g_client_pid = 0;
+			write(1, g_state.buffer, ft_strlen(g_state.buffer));
+			free(g_state.buffer);
+			g_state.buffer = NULL;
 		}
 		else
-			write(1, (char *)&g_state.g_char, 1);
+			buffer_join(&g_state);
 		g_state.g_char = 0;
 		g_state.g_bit_count = 0;
 	}

@@ -1,10 +1,10 @@
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 
 NAME_SERVER = server
 NAME_CLIENT = client
 
-SRC_SERVER = server.c
+SRC_SERVER = server.c utilis.c
 SRC_CLIENT = client.c
 
 OBJ_SERVER = $(SRC_SERVER:.c=.o)
