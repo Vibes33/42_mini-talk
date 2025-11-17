@@ -40,7 +40,6 @@ void	handle_sigusr(int sig, siginfo_t *info, void *context)
 int	main(void)
 {
 	struct sigaction	sa_usr1;
-	struct sigaction	sa_usr2;
 	int					server_pid;
 
 	server_pid = getpid();
@@ -48,12 +47,8 @@ int	main(void)
 	sa_usr1.sa_sigaction = handle_sigusr;
 	sigemptyset(&sa_usr1.sa_mask);
 	sa_usr1.sa_flags = SA_SIGINFO;
-	ft_bzero(&sa_usr2, sizeof(sa_usr2));
-	sa_usr2.sa_sigaction = handle_sigusr;
-	sigemptyset(&sa_usr2.sa_mask);
-	sa_usr2.sa_flags = SA_SIGINFO;
 	sigaction(SIGUSR1, &sa_usr1, NULL);
-	sigaction(SIGUSR2, &sa_usr2, NULL);
+	sigaction(SIGUSR2, &sa_usr1, NULL);
 	ft_printf("Server PID: %d\n", server_pid);
 	while (1)
 		pause();
